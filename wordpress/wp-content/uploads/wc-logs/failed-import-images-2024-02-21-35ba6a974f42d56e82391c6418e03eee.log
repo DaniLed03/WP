@@ -1,0 +1,2 @@
+2024-02-21T15:44:40+00:00 INFO {"url":"retail-blog-img-6.jpg","data":{"errors":{"http_request_failed":["cURL error 28: Connection timed out after 5014 milliseconds"]},"error_data":[]}}
+2024-02-21T15:44:45+00:00 INFO {"url":"retail-blog-img-6.jpg","data":{"errors":{"http_request_failed":["cURL error 28: Connection timed out after 5007 milliseconds"]},"error_data":[]}}
