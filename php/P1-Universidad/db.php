@@ -11,7 +11,5 @@
     //verificar la conexion
     if($conn->connect_error){
         die("Conexion fallida: " . $conn->connect_error);
-    }else {
-        die("CONEXIÓN EXITOSA");
     }
 ?>
