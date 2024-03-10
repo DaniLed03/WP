@@ -19,9 +19,9 @@
     //Baja de alumnos
     if(isset($_GET['eliminar_alumno'])){
         $id = $_GET['eliminar_alumno'];
-        $sql = "DELETE FORM alumnos WHERE id = $id";
+        $sql = "DELETE FROM alumnos WHERE id = $id";
         $result = $conn->query($sql);
-        header("Locarion: listado_alumnos.php");   
+        header("Location: listado_alumnos.php");   
     }
 
     //Cambios de alumnos 
@@ -37,7 +37,7 @@
         $sql = "UPDATE alumnos SET matricula = '$matricula', 
         nombre = '$nombre', edad = '$edad', email = '$email', id_carrera = '$id_carrera' WHERE id = $id";
         $result = $conn->query($sql);
-        header("Location: listado_carreras.php");
+        header("Location: listado_alumnos.php");
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -69,6 +69,47 @@
         $sql = "UPDATE carrera SET id_carrera = '$id_carrera', nombre = '$nombre_carrera' WHERE id_carrera = $id_carrera";
         $result = $conn->query($sql);
         header("Location: listado_carreras.php");
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    // Alta de materias
+    if(isset($_POST['alta_materia'])){
+        $nombre = $_POST['nombre'];
+
+        $sql = "INSERT INTO materias (nombre) VALUES ('$nombre')";
+        $result = $conn->query($sql);
+        header("Location: listado_materias.php");
+    }
+
+    // Baja de materias
+    if(isset($_GET['eliminar_materia'])){
+        $id = $_GET['eliminar_materia'];
+        $sql = "DELETE FROM materias WHERE id_materia = $id";
+        $result = $conn->query($sql);
+        header("Location: listado_materias.php");   
+    }
+
+    // Cambios de materias
+    if(isset($_POST['cambio_materia'])){
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+
+        $sql = "UPDATE materias SET nombre = '$nombre' WHERE id_materia = $id";
+        $result = $conn->query($sql);
+        header("Location: listado_materias.php");
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    // Alta de asignación de materias a alumnos
+    if(isset($_POST['asignar_materias'])){
+        $id_alumno = $_POST['id_alumno'];
+        $materias_asignadas = $_POST['materias_asignadas'];
+
+        $sql = "UPDATE alumnos SET materias_asignadas = '$materias_asignadas' WHERE id = $id_alumno";
+        $result = $conn->query($sql);
+        header("Location: listado_alumnos.php");
     }
 
 ?>
