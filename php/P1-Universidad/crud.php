@@ -16,13 +16,21 @@
         header("Location: listado_alumnos.php");
     }
 
-    //Baja de alumnos
+    // Baja de alumnos
     if(isset($_GET['eliminar_alumno'])){
         $id = $_GET['eliminar_alumno'];
-        $sql = "DELETE FROM alumnos WHERE id = $id";
-        $result = $conn->query($sql);
+
+        // Eliminar las calificaciones del alumno
+        $sql_delete_calificaciones = "DELETE FROM calificaciones WHERE id_alumno = $id";
+        $result_delete_calificaciones = $conn->query($sql_delete_calificaciones);
+
+        // Después de eliminar las calificaciones, puedes eliminar al alumno
+        $sql_delete_alumno = "DELETE FROM alumnos WHERE id = $id";
+        $result_delete_alumno = $conn->query($sql_delete_alumno);
+
         header("Location: listado_alumnos.php");   
     }
+
 
     //Cambios de alumnos 
     if(isset($_POST['cambio_alumno'])){
@@ -52,13 +60,29 @@
         header("Location: listado_carreras.php");
     }
 
-    //Baja de carreras
+    // Baja de carreras
     if(isset($_GET['eliminar_carrera'])){
         $id_carrera = $_GET['eliminar_carrera'];
-        $sql = "DELETE FROM carrera WHERE id_carrera = $id_carrera";
-        $result = $conn->query($sql);
-        header("Location: listado_carreras.php");   
+        
+        // Verificar si existen alumnos asociados a la carrera
+        $sql_check_alumnos = "SELECT * FROM alumnos WHERE id_carrera = $id_carrera";
+        $result_check_alumnos = $conn->query($sql_check_alumnos);
+        
+        if ($result_check_alumnos->num_rows > 0) {
+            // Si hay alumnos asociados, establecer el mensaje de error en una variable JavaScript
+            echo "<script>
+                    alert('No se puede eliminar la carrera porque tiene alumnos registrados.');
+                    window.location.href = 'listado_carreras.php';
+                </script>";
+            exit();
+        } else {
+            // Si no hay alumnos asociados, proceder con la eliminación de la carrera
+            $sql = "DELETE FROM carrera WHERE id_carrera = $id_carrera";
+            $result = $conn->query($sql);
+            header("Location: listado_carreras.php");   
+        }
     }
+
 
     //Cambios de carreras
     if(isset($_POST['cambio_carrera'])){
@@ -83,11 +107,14 @@
     }
 
     // Baja de materias
-    if(isset($_GET['eliminar_materia'])){
-        $id = $_GET['eliminar_materia'];
-        $sql = "DELETE FROM materias WHERE id_materia = $id";
+    if(isset($_POST['eliminar_materia_alumno'])){
+        $id_alumno = $_POST['id_alumno']; // Obtener el ID del alumno
+        $id_materia = $_POST['id_materia']; // Obtener el ID de la materia a eliminar
+        $sql = "DELETE FROM asignacion_materias_alumno WHERE id_materia = $id_materia AND id_alumno = $id_alumno";
         $result = $conn->query($sql);
-        header("Location: listado_materias.php");   
+        // Redirigir a listado_alumnos.php
+        header("Location: listado_alumnos.php");
+        exit();
     }
 
     // Cambios de materias
@@ -102,14 +129,68 @@
 
     //--------------------------------------------------------------------------------------------------------
 
-    // Alta de asignación de materias a alumnos
-    if(isset($_POST['asignar_materias'])){
+    // Baja de materias
+    if(isset($_POST['eliminar_materia_carrera'])){
+        $id_carrera = $_POST['id_carrera']; // Obtener el ID de la carrera
+        $id_materia = $_POST['id_materia']; // Obtener el ID de la materia a eliminar
+        $sql = "DELETE FROM asignacion_materias_carrera WHERE id_materia = $id_materia AND id_carrera = $id_carrera";
+        $result = $conn->query($sql);
+        // Redirigir a listado_carreras.php
+        header("Location: listado_carreras.php");
+        exit();
+    }
+
+    // Verifica si se recibieron los datos para guardar la asignación de materias
+    if(isset($_POST['guardar_asignacion'])) {
         $id_alumno = $_POST['id_alumno'];
         $materias_asignadas = $_POST['materias_asignadas'];
 
-        $sql = "UPDATE alumnos SET materias_asignadas = '$materias_asignadas' WHERE id = $id_alumno";
-        $result = $conn->query($sql);
+        // Elimina las asignaciones anteriores del alumno
+        $sql_delete = "DELETE FROM asignacion_materias_alumno WHERE id_alumno = $id_alumno";
+        $conn->query($sql_delete);
+
+        // Inserta las nuevas asignaciones de materias
+        foreach($materias_asignadas as $materia_id) {
+            $sql_insert = "INSERT INTO asignacion_materias_alumno (id_alumno, id_materia) VALUES ($id_alumno, $materia_id)";
+            $conn->query($sql_insert);
+        }
+
+        // Redirige de vuelta a la página de listado de alumnos
         header("Location: listado_alumnos.php");
+        exit();
     }
 
+    //---------------------------------------------------------------------------------------------------------
+
+    // Verifica si se envió el formulario de asignación de materias a la carrera
+    if(isset($_POST['asignar_materias_carrera'])) {
+        // Verifica si se proporcionó el ID de la carrera
+        if(isset($_POST['id_carrera'])) {
+            $id_carrera = $_POST['id_carrera'];
+            
+            // Verifica si se seleccionaron materias para asignar
+            if(isset($_POST['materias_asignadas']) && is_array($_POST['materias_asignadas'])) {
+                // Procesa la asignación de materias a la carrera
+                foreach($_POST['materias_asignadas'] as $id_materia) {
+                    // Inserta los datos en la tabla de asignación de materias a la carrera
+                    $sql_insert = "INSERT INTO asignacion_materias_carrera (id_carrera, id_materia) VALUES ('$id_carrera', '$id_materia')";
+                    if ($conn->query($sql_insert) === TRUE) {
+                        echo "Materia asignada correctamente a la carrera.";
+                    } else {
+                        echo "Error al asignar materia a la carrera: " . $conn->error;
+                    }
+                }
+                // Redirige de vuelta a listado_carreras.php después de completar la asignación
+                header("Location: listado_carreras.php");
+                exit();
+            } else {
+                // Si no se seleccionaron materias, muestra un mensaje de error o realiza alguna acción adecuada
+                echo "No se seleccionaron materias para asignar.";
+            }
+        } else {
+            // Si no se proporcionó el ID de la carrera, muestra un mensaje de error o realiza alguna acción adecuada
+            echo "No se proporcionó el ID de la carrera.";
+        }
+    }
+    
 ?>

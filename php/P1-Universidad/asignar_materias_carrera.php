@@ -1,9 +1,26 @@
+<?php
+include 'db.php';
+
+// Verifica si se proporcionó el ID de la carrera en la URL
+if(isset($_GET['id_carrera'])) {
+    $id_carrera = $_GET['id_carrera'];
+
+    // Consulta para obtener las materias disponibles
+    $sql_materias = "SELECT * FROM materias";
+    $result_materias = $conn->query($sql_materias);
+} else {
+    // Redirige si no se proporciona el ID de la carrera
+    header("Location: listado_carreras.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Materia</title>
+    <title>Asignar Materias a Carrera</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -56,13 +73,27 @@
 
 <div class="content">
     <div class="container mt-5">
-        <h2>Agregar Materia</h2>
+        <h1>Asignar Materias a Carrera</h1>
         <form action="crud.php" method="POST">
+            <input type="hidden" name="id_carrera" value="<?php echo $_GET['id_carrera']; ?>">
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <label>Materias Disponibles:</label>
+                <?php 
+                if ($result_materias->num_rows > 0) {
+                    while($row_materia = $result_materias->fetch_assoc()): ?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="materias_asignadas[]" value="<?php echo $row_materia['id_materia']; ?>">
+                            <label class="form-check-label">
+                                <?php echo $row_materia['nombre']; ?>
+                            </label>
+                        </div>
+                    <?php endwhile;
+                } else {
+                    echo "No hay materias disponibles.";
+                }
+                ?>
             </div>
-            <button type="submit" class="btn btn-primary" name="alta_materia">Agregar</button>
+            <button type="submit" class="btn btn-primary" name="asignar_materias_carrera">Asignar Materias</button>
         </form>
     </div>
 </div>
