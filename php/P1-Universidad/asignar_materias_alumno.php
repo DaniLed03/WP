@@ -1,5 +1,6 @@
 <?php
-include 'db.php'; // Incluye el archivo db.php para establecer la conexión
+// Incluye el archivo db.php para establecer la conexión
+include 'db.php';
 
 // Verifica si se proporcionó el ID del alumno en la URL
 if(isset($_GET['id_alumno'])) {
@@ -30,6 +31,7 @@ if(isset($_GET['id_alumno'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Materias a Alumno</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -69,6 +71,7 @@ if(isset($_GET['id_alumno'])) {
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -80,6 +83,7 @@ if(isset($_GET['id_alumno'])) {
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h1>Asignar Materias a Alumno</h1>

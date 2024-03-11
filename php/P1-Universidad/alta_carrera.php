@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de Carreras</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -43,6 +44,7 @@
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -54,9 +56,11 @@
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h2>Alta de Carreras</h2>
+        <!-- Formulario para agregar una carrera -->
         <form action="crud.php" method="POST">
             <div class="form-group" >
                 <label for="nombre_carrera">Nombre de la carrera:</label>

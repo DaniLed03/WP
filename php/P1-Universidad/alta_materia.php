@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Materia</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -35,16 +36,19 @@
             background-color: #8a56ac; /* Cambio de color de fondo al hacer hover */
         }
 
+        /* Estilos para el contenido */
         .content {
-            margin-left: 250px;
+            margin-left: 250px; /* Espacio a la izquierda para el menú lateral */
             padding: 20px;
         }
     </style>
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
+    <!-- Enlaces a las diferentes páginas -->
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
     <a href="listado_alumnos.php">Listado de Alumnos</a>
     <a href="alta_alumno.php">Agregar Alumno</a>
@@ -54,9 +58,11 @@
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h2>Agregar Materia</h2>
+        <!-- Formulario para agregar materia -->
         <form action="crud.php" method="POST">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>

@@ -1,9 +1,14 @@
 <?php
+// Incluir el archivo de conexión a la base de datos
 include 'db.php';
+
+// Obtener el ID de la carrera de la URL
 $id_carrera = $_GET['id_carrera'];
+
+// Consulta SQL para obtener los detalles de la carrera con el ID proporcionado
 $sql = "SELECT * FROM carrera WHERE id_carrera = $id_carrera";
 $result = $conn->query($sql);
-$row = $result->fetch_assoc();
+$row = $result->fetch_assoc(); // Obtener la fila de resultados como un array asociativo
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +17,7 @@ $row = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Carrera</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -51,6 +57,7 @@ $row = $result->fetch_assoc();
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -62,15 +69,20 @@ $row = $result->fetch_assoc();
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h2>Editar Carrera</h2>
+        <!-- Formulario para editar la carrera -->
         <form action="crud.php" method="POST">
+            <!-- Campo oculto para enviar el ID de la carrera -->
             <input type="hidden" name="id_carrera" value="<?php echo $row['id_carrera'] ?>">
             <div class="form-group">
                 <label for="nombre_carrera">Nombre de la carrera:</label>
+                <!-- Campo de entrada para el nombre de la carrera -->
                 <input type="text" class="form-control" name="nombre_carrera" value="<?php echo $row['nombre'] ?>" required>
             </div>
+            <!-- Botón para guardar los cambios -->
             <button type="submit" class="btn btn-primary" name="cambio_carrera">Guardar Cambios</button>
         </form>
     </div>

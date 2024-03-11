@@ -1,4 +1,5 @@
 <?php
+// Incluye el archivo de conexión a la base de datos
 include 'db.php';
 
 // Verifica si se proporcionó el ID del alumno en la URL
@@ -14,6 +15,7 @@ if(isset($_GET['id_alumno'])) {
     
     // Verifica si se envió el formulario para asignar calificaciones
     if(isset($_POST['guardar_calificaciones'])) {
+        // Recorre el array de calificaciones enviado por el formulario
         foreach($_POST['calificaciones'] as $id_materia => $calificacion) {
             if(!empty($calificacion)) {
                 // Verifica si ya existe una calificación para la materia y el alumno

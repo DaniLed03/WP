@@ -1,4 +1,5 @@
 <?php
+// Incluye el archivo de conexión a la base de datos
 include 'db.php';
 
 // Verifica si se proporcionó el ID de la carrera en la URL
@@ -24,6 +25,7 @@ if(isset($_GET['id_carrera'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Materias Asignadas a la Carrera</title>
+    <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -63,6 +65,7 @@ if(isset($_GET['id_carrera'])) {
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -74,6 +77,7 @@ if(isset($_GET['id_carrera'])) {
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h1>Materias Asignadas a la Carrera</h1>
@@ -88,17 +92,21 @@ if(isset($_GET['id_carrera'])) {
             </thead>
             <tbody>
                 <?php
+                // Comprueba si hay materias asignadas a la carrera
                 if ($result_materias_carrera->num_rows > 0) {
                     $count = 1;
+                    // Itera a través de las materias asignadas
                     while($row = $result_materias_carrera->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $count . "</td>";
                         echo "<td>" . $row['nombre'] . "</td>";
-                        echo "<td><form action='crud.php' method='POST'><input type='hidden' name='id_carrera' value='$id_carrera'><input type='hidden' name='id_materia' value='".$row['id_materia']."'><button type='submit' class='btn btn-danger' name='eliminar_materia_carrera'>Eliminar</button></form></td>"; // Botón para eliminar la materia de la carrera
+                        // Botón para eliminar la materia de la carrera
+                        echo "<td><form action='crud.php' method='POST'><input type='hidden' name='id_carrera' value='$id_carrera'><input type='hidden' name='id_materia' value='".$row['id_materia']."'><button type='submit' class='btn btn-danger' name='eliminar_materia_carrera'>Eliminar</button></form></td>";
                         echo "</tr>";
                         $count++;
                     }
                 } else {
+                    // Mensaje si no hay materias asignadas
                     echo "<tr><td colspan='3'>No hay materias asignadas a esta carrera.</td></tr>";
                 }
                 ?>

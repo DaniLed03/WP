@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Alta de Estudiantes</title>
+    <!-- Agregar el enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -41,9 +42,10 @@
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
-    <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
+    <a href="index.php" style="color: #fff;">Inicio</a> <!-- Enlace para volver al menú principal -->
     <a href="listado_alumnos.php">Listado de Alumnos</a>
     <a href="alta_alumno.php">Agregar Alumno</a>
     <a href="listado_carreras.php">Listado de Carreras</a>
@@ -52,9 +54,11 @@
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h2>Alta de Estudiantes</h2>
+        <!-- Formulario para agregar estudiantes -->
         <form action="crud.php" method="POST">
             <div class="form-group">
                 <label for="matricula">Matricula: </label>
@@ -74,6 +78,7 @@
             </div>
             <div class="form-group">
                 <label for="id_carrera">Carrera: </label>
+                <!-- Selector para elegir la carrera del estudiante -->
                 <select class="form-control" id="id_carrera" name="id_carrera" required>
                     <option value="">Selecciona una carrera</option>
                     <?php
@@ -90,6 +95,7 @@
                 </select>
             </div>
             <br>
+            <!-- Botón para agregar estudiante -->
             <button type="submit" class="btn btn-primary" name="alta_alumno">Agregar Estudiante</button>
         </form>
     </div>

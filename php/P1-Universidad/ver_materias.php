@@ -1,9 +1,9 @@
 <?php
-include 'db.php';
+include 'db.php'; // Incluir el archivo de conexión a la base de datos
 
 // Verifica si se proporcionó el ID del alumno en la URL
 if(isset($_GET['id_alumno'])) {
-    $id_alumno = $_GET['id_alumno'];
+    $id_alumno = $_GET['id_alumno']; // Obtener el ID del alumno desde la URL
 
     // Consulta para obtener las materias asignadas al alumno
     $sql_materias_alumno = "SELECT materias.id_materia, materias.nombre, calificaciones.calificacion 
@@ -11,7 +11,7 @@ if(isset($_GET['id_alumno'])) {
                             INNER JOIN asignacion_materias_alumno ON materias.id_materia = asignacion_materias_alumno.id_materia 
                             LEFT JOIN calificaciones ON materias.id_materia = calificaciones.id_materia AND calificaciones.id_alumno = $id_alumno
                             WHERE asignacion_materias_alumno.id_alumno = $id_alumno";
-    $result_materias_alumno = $conn->query($sql_materias_alumno);
+    $result_materias_alumno = $conn->query($sql_materias_alumno); // Ejecutar la consulta
 
     // Exportar a Excel
     if(isset($_POST['export_materias'])){
@@ -25,7 +25,7 @@ if(isset($_GET['id_alumno'])) {
                 $row['calificacion'] ?? 'N/A' // Mostrar la calificación o 'N/A' si no tiene
             ];
         }
-        exportToXLS('materias_alumno_'.$id_alumno, $data);
+        exportToXLS('materias_alumno_'.$id_alumno, $data); // Llamar a la función para exportar a Excel
     }
 } else {
     // Redirige si no se proporciona el ID del alumno
@@ -33,6 +33,7 @@ if(isset($_GET['id_alumno'])) {
     exit();
 }
 
+// Función para exportar a Excel
 function exportToXLS($filename, $data){
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment; filename="' . $filename . '.xls"');

@@ -36,6 +36,7 @@ function exportToXLS($filename, $data){
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -129,4 +130,5 @@ function exportToXLS($filename, $data){
 
 </body>
 </html>
+
 

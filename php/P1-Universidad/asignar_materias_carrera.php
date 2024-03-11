@@ -1,4 +1,5 @@
 <?php
+// Incluye el archivo de conexión a la base de datos
 include 'db.php';
 
 // Verifica si se proporcionó el ID de la carrera en la URL
@@ -21,6 +22,7 @@ if(isset($_GET['id_carrera'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Materias a Carrera</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -63,6 +65,7 @@ if(isset($_GET['id_carrera'])) {
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
+    <!-- Enlaces para otras páginas -->
     <a href="listado_alumnos.php">Listado de Alumnos</a>
     <a href="alta_alumno.php">Agregar Alumno</a>
     <a href="listado_carreras.php">Listado de Carreras</a>
@@ -74,10 +77,12 @@ if(isset($_GET['id_carrera'])) {
 <div class="content">
     <div class="container mt-5">
         <h1>Asignar Materias a Carrera</h1>
+        <!-- Formulario para asignar materias a la carrera -->
         <form action="crud.php" method="POST">
             <input type="hidden" name="id_carrera" value="<?php echo $_GET['id_carrera']; ?>">
             <div class="form-group">
                 <label>Materias Disponibles:</label>
+                <!-- Bucle para mostrar las materias disponibles como checkboxes -->
                 <?php 
                 if ($result_materias->num_rows > 0) {
                     while($row_materia = $result_materias->fetch_assoc()): ?>

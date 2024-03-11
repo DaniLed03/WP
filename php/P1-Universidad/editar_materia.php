@@ -1,7 +1,11 @@
 <?php
+// Incluir el archivo de conexión a la base de datos
 include 'db.php';
 
+// Obtener el ID de la materia a editar de los parámetros GET
 $id_materia = $_GET['id_materia'];
+
+// Consulta SQL para seleccionar la materia específica según su ID
 $sql = "SELECT * FROM materias WHERE id_materia = $id_materia";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -13,6 +17,7 @@ $row = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Materia</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -52,6 +57,7 @@ $row = $result->fetch_assoc();
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -63,12 +69,17 @@ $row = $result->fetch_assoc();
     <a href="alta_materia.php">Agregar Materia</a>
 </div>
 
+<!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
         <h2>Editar Materia</h2>
+        
+        <!-- Formulario para editar la materia -->
         <?php
+        // Incluir nuevamente el archivo de conexión a la base de datos
         include 'db.php';
 
+        // Consulta SQL para seleccionar la materia específica según su ID
         $id_materia = $_GET['id_materia'];
         $sql = "SELECT * FROM materias WHERE id_materia = $id_materia";
         $result = $conn->query($sql);
@@ -87,4 +98,3 @@ $row = $result->fetch_assoc();
 
 </body>
 </html>
-

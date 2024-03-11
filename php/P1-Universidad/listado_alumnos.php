@@ -1,13 +1,13 @@
 <?php
-include 'db.php';
+include 'db.php'; // Incluir archivo de conexión a la base de datos
 
 // Consulta para obtener todos los alumnos con sus carreras
 $sql = "SELECT alumnos.*, carrera.nombre AS nombre_carrera 
         FROM alumnos 
         INNER JOIN carrera ON alumnos.id_carrera = carrera.id_carrera";
-$result = $conn->query($sql);
+$result = $conn->query($sql); // Ejecutar la consulta
 
-// Exportar a Excel
+// Función para exportar los datos a Excel
 if(isset($_POST['export_alumnos'])){
     $data = [];
     $columns = ['Matrícula', 'Nombre', 'Edad', 'Email', 'Carrera'];
@@ -24,6 +24,7 @@ if(isset($_POST['export_alumnos'])){
     exportToXLS('alumnos', $data);
 }
 
+// Función para exportar datos a Excel
 function exportToXLS($filename, $data){
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
@@ -100,6 +101,7 @@ function exportToXLS($filename, $data){
 <div class="content">
     <div class="container mt-5">
         <h2>Listado de Alumnos</h2>
+        <!-- Tabla para mostrar los datos de los alumnos -->
         <table class="table">
             <thead>
             <tr>
@@ -116,12 +118,14 @@ function exportToXLS($filename, $data){
             $result->data_seek(0); // Resetear el puntero del resultado
             while ($row = $result->fetch_assoc()):
                 ?>
+                <!-- Filas de la tabla con los datos de cada alumno -->
                 <tr>
                     <td><?php echo $row['matricula'] ?></td>
                     <td><?php echo $row['nombre'] ?></td>
                     <td><?php echo $row['edad'] ?></td>
                     <td><?php echo $row['email'] ?></td>
                     <td><?php echo $row['nombre_carrera'] ?></td>
+                    <!-- Botones de acción para editar, asignar materias, ver materias y eliminar alumno -->
                     <td>
                         <a href="editar_alumno.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Editar</a>
                         <a href="asignar_materias_alumno.php?id_alumno=<?php echo $row['id']; ?>" class="btn btn-info">Asignar Materias</a>
@@ -136,6 +140,7 @@ function exportToXLS($filename, $data){
             endwhile; ?>
             </tbody>
         </table>
+        <!-- Formulario para exportar los datos a Excel -->
         <form action="" method="POST">
             <input type="submit" name="export_alumnos" value="Exportar Excel" class="btn btn-success">
         </form>

@@ -12,7 +12,6 @@
         $sql = "INSERT INTO alumnos (matricula, nombre, edad, email, id_carrera) 
                 VALUES ('$matricula', '$nombre', '$edad', '$email', '$id_carrera')";
         $result = $conn->query($sql);
-        // Redirect back to listado_alumno.php
         header("Location: listado_alumnos.php");
     }
 

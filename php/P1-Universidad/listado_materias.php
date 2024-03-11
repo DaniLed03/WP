@@ -1,7 +1,8 @@
 <?php
+// Incluir el archivo de conexión a la base de datos
 include 'db.php';
 
-// Consulta para obtener todas las materias
+// Consultar todas las materias
 $sql = "SELECT * FROM materias";
 $result = $conn->query($sql);
 
@@ -16,13 +17,15 @@ if(isset($_POST['export_materias'])){
             $row['nombre']
         ];
     }
-    exportToXLS('materias', $data);
+    exportToXLS('materias', $data); // Llamar a la función para exportar a Excel
 }
 
+// Función para exportar a Excel
 function exportToXLS($filename, $data){
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
 
+    // Crear tabla HTML para exportar a Excel
     echo '<table border="1">';
     foreach ($data as $row) {
         echo '<tr>';
@@ -43,6 +46,7 @@ function exportToXLS($filename, $data){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Materias</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         /* Estilos para el menú lateral */
@@ -82,6 +86,7 @@ function exportToXLS($filename, $data){
 </head>
 <body>
 
+<!-- Menú lateral -->
 <div class="sidebar">
     <h3>Menú Principal</h3>
     <a href="index.php" style="color: #fff;">Inicio</a> <!-- Agregar enlace para volver al menú principal -->
@@ -94,12 +99,15 @@ function exportToXLS($filename, $data){
 </div>
 
 <?php
+// Incluir el archivo de conexión a la base de datos nuevamente para utilizarlo en el cuerpo del documento
 include 'db.php';
 
+// Consultar todas las materias
 $sql = "SELECT * FROM materias";
 $result = $conn->query($sql);
 ?>
 
+<!-- Contenido principal -->
 <div class="container mt-5 content">
     <h2>Listado de Materias</h2>
     <table class="table">
@@ -123,6 +131,7 @@ $result = $conn->query($sql);
             <?php endwhile; ?>
         </tbody>
     </table>
+    <!-- Formulario para exportar a Excel -->
     <form method="post">
         <button type="submit" name="export_materias" class="btn btn-success mb-3">Exportar a Excel</button>
     </form>
@@ -130,4 +139,3 @@ $result = $conn->query($sql);
 
 </body>
 </html>
-
