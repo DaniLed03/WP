@@ -82,7 +82,6 @@
         }
     }
 
-
     //Cambios de carreras
     if(isset($_POST['cambio_carrera'])){
         $id_carrera = $_POST['id_carrera'];

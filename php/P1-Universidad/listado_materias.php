@@ -79,8 +79,13 @@ function exportToXLS($filename, $data){
         }
 
         .content {
-            margin-left: 250px;
-            padding: 20px;
+            margin-left: 310px; /* Ajustar este valor según sea necesario */
+            padding: 50px 20px 20px;
+        }
+
+        /* Añadir espacio entre el menú lateral y el título */
+        .content h2 {
+            margin-top: 30px;
         }
     </style>
 </head>
