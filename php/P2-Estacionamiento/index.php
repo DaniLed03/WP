@@ -38,6 +38,8 @@
         <div class="list-group">
             <a href="alta_carros.php" class="btn btn-purple btn-lg btn-block mb-2">Agregar Carro</a>
             <a href="listado_carros.php" class="btn btn-purple btn-lg btn-block mb-2">Listado de Carros</a>
+            <a href="listado_servicios.php" class="btn btn-purple btn-lg btn-block mb-2">Listado de Servicios</a>
+            <a href="alta_servicio.php" class="btn btn-purple btn-lg btn-block mb-2">Agregar Servicio</a>
         </div> 
     </div>
 </body>

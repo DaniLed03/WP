@@ -40,12 +40,34 @@
         $email = $_POST['email'];
         $id_carrera = $_POST['id_carrera'];
 
-        //Query de actualización en la tabla alumnos
+        // Consultar si el alumno tiene calificaciones registradas para otra carrera
+        $sql_calificaciones = "SELECT * FROM calificaciones 
+                       INNER JOIN asignacion_materias_alumno 
+                       ON calificaciones.id_materia = asignacion_materias_alumno.id_materia 
+                       WHERE asignacion_materias_alumno.id_alumno = $id";
+
+        $result_calificaciones = $conn->query($sql_calificaciones);
+
+        // Si hay calificaciones, mostrar SweetAlert para confirmar la eliminación
+        if ($result_calificaciones->num_rows > 0) {
+            echo "<script>
+                    if(confirm('Este alumno tiene calificaciones registradas para otra carrera. ¿Deseas borrarlas?')) {
+                        window.location.href = 'eliminar_calificaciones.php?id=$id'; // Redirige para eliminar las calificaciones
+                    } else {
+                        window.location.href = 'editar_alumno.php?id=$id'; // Redirige de vuelta a la página de edición de alumno
+                    }
+                </script>";
+            exit(); // Salir del script después de mostrar el SweetAlert
+        }
+
+        // Si no hay calificaciones, continuar con la actualización del alumno
         $sql = "UPDATE alumnos SET matricula = '$matricula', 
         nombre = '$nombre', edad = '$edad', email = '$email', id_carrera = '$id_carrera' WHERE id = $id";
         $result = $conn->query($sql);
         header("Location: listado_alumnos.php");
     }
+
+
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -127,16 +149,35 @@
 
     //--------------------------------------------------------------------------------------------------------
 
-    // Baja de materias
+    // Baja de materias de la carrera
     if(isset($_POST['eliminar_materia_carrera'])){
         $id_carrera = $_POST['id_carrera']; // Obtener el ID de la carrera
         $id_materia = $_POST['id_materia']; // Obtener el ID de la materia a eliminar
-        $sql = "DELETE FROM asignacion_materias_carrera WHERE id_materia = $id_materia AND id_carrera = $id_carrera";
-        $result = $conn->query($sql);
-        // Redirigir a listado_carreras.php
-        header("Location: listado_carreras.php");
-        exit();
+
+        // Verificar si hay alumnos asignados a esta materia en la tabla asignacion_materias_alumnos
+        $sql_check_alumnos = "SELECT * FROM asignacion_materias_alumno WHERE id_materia = $id_materia";
+        $result_check_alumnos = $conn->query($sql_check_alumnos);
+
+        if ($result_check_alumnos->num_rows > 0) {
+            // Si hay alumnos asignados, mostrar una alerta
+            echo "<script>
+                    if(confirm('No se puede eliminar esta materia porque actualmente hay alumnos inscritos a ella. ¿Deseas eliminar todas las asignaciones a esta materia?')) {
+                        window.location.href = 'eliminar_asignaciones_materia.php?id_materia=$id_materia'; // Redirigir para eliminar las asignaciones
+                    } else {
+                        window.location.href = 'listado_carreras.php'; // Redirigir de vuelta a la lista de carreras
+                    }
+                </script>";
+            exit(); // Salir del script después de mostrar la alerta
+        } else {
+            // Si no hay alumnos asignados, proceder con la eliminación de la asignación de la materia
+            $sql_delete = "DELETE FROM asignacion_materias_carrera WHERE id_materia = $id_materia AND id_carrera = $id_carrera";
+            $result_delete = $conn->query($sql_delete);
+            // Redirigir de vuelta a la lista de carreras después de completar la eliminación
+            header("Location: listado_carreras.php");
+            exit();
+        }
     }
+
 
     // Verifica si se recibieron los datos para guardar la asignación de materias
     if(isset($_POST['guardar_asignacion'])) {

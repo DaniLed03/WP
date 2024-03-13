@@ -60,6 +60,7 @@ $row = $result->fetch_assoc();
                 <input type="text" class="form-control" id="procedencia" name="procedencia" value="<?php echo $row['procedencia']; ?>" required>
             </div>
             <button type="submit" class="btn btn-primary" name="cambio_carro">Guardar Cambios</button>
+            <a href="listado_carros.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>

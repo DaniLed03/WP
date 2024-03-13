@@ -59,6 +59,8 @@ function exportToXLS($filename, $data){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Materias Asignadas al Alumno</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <!-- Agrega SweetAlert2 CDN en tu archivo HTML antes de cerrar la etiqueta </head> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* Estilos para el menú lateral */
         .sidebar {
@@ -118,7 +120,6 @@ function exportToXLS($filename, $data){
                     <th>ID Materia</th>
                     <th>Nombre de la Materia</th>
                     <th>Calificación</th>
-                    <th>Acciones</th> 
                 </tr>
             </thead>
             <tbody>
@@ -133,7 +134,6 @@ function exportToXLS($filename, $data){
                                 <form action='crud.php' method='POST'>
                                     <input type='hidden' name='id_alumno' value='$id_alumno'>
                                     <input type='hidden' name='id_materia' value='".$row['id_materia']."'>
-                                    <button type='submit' class='btn btn-danger mr-2' name='eliminar_materia_alumno'>Dar de Baja</button>
                                 </form>
                               </td>"; // Botón para dar de baja la materia asignada al alumno
                         echo "</tr>";

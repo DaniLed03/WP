@@ -1,23 +1,21 @@
 <?php
-// Incluir el archivo de conexión a la base de datos
+//integrar archivo de conexion
 include 'db.php';
 
-// Verifica si se recibieron los parámetros necesarios
-if(isset($_GET['id_alumno']) && isset($_GET['id_carrera'])) {
-    $id_alumno = $_GET['id_alumno'];
-    $id_carrera = $_GET['id_carrera'];
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
 
-    // Eliminar las calificaciones del alumno en materias asociadas a la carrera que se está cambiando
-    $sql_delete_calificaciones = "DELETE c FROM calificaciones c 
-                                  INNER JOIN asignacion_materias_carrera amc ON c.id_materia = amc.id_materia
-                                  WHERE c.id_alumno = $id_alumno AND amc.id_carrera <> $id_carrera";
+    // Eliminar las calificaciones del alumno
+    $sql_delete_calificaciones = "DELETE FROM calificaciones WHERE id_alumno = $id";
     $result_delete_calificaciones = $conn->query($sql_delete_calificaciones);
 
-    header("Location: listado_alumnos.php");
+    // Eliminar las asignaciones de materias del alumno
+    $sql_delete_asignaciones = "DELETE FROM asignacion_materias_alumno WHERE id_alumno = $id";
+    $result_delete_asignaciones = $conn->query($sql_delete_asignaciones);
+
+    header("Location: listado_alumnos.php"); // Redirigir de vuelta al listado de alumnos
     exit();
 } else {
-    // Si no se recibieron los parámetros, redirige a la página de listado de alumnos
-    header("Location: listado_alumnos.php");
-    exit();
+    echo "ID de alumno no proporcionado.";
 }
 ?>

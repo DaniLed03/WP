@@ -1,9 +1,33 @@
+<?php
+include 'db.php';
+
+// Verificar si se ha enviado el formulario de edición
+if(isset($_POST['editar_servicio'])){
+    $id_servicio = $_POST['id_servicio'];
+    $nombre = $_POST['nombre'];
+    $costo = $_POST['costo'];
+
+    // Actualizar los datos del servicio en la base de datos
+    $sql = "UPDATE servicios SET nombre='$nombre', costo='$costo' WHERE id_servicio=$id_servicio";
+    $result = $conn->query($sql);
+    header("Location: listado_servicios.php"); // Redirigir al listado de servicios después de la actualización
+}
+
+// Obtener el ID del servicio de la URL
+$id_servicio = $_GET['id_servicio'];
+
+// Consultar la información del servicio específico
+$sql = "SELECT * FROM servicios WHERE id_servicio=$id_servicio";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alta de Carros</title>
+    <title>Edición de Servicio</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
         body {
@@ -52,9 +76,7 @@
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a href="index.php"> <!-- Agregamos el enlace al logo -->
-                <img src="./images/Ledetech.png" alt="Logo">
-            </a>
+            <img src="./images/Ledetech.png" alt="Logo">
         </div>
         <div class="navbar-brand">
             Menú Principal
@@ -74,49 +96,25 @@
             </li>
         </ul>
     </nav>
+
     <div class="content">
         <div class="container mt-5">
-            <h2>Alta de Carros</h2>
-            <form action="crud.php" method="POST">
+            <h2>Edición de Servicio</h2>
+            <form action="editar_servicio.php" method="POST">
+                <input type="hidden" name="id_servicio" value="<?php echo $row['id_servicio']; ?>">
                 <div class="form-group">
-                    <label for="no_serie">No. de Serie:</label>
-                    <input type="text" class="form-control" id="no_serie" name="no_serie" required>
+                    <label for="nombre">Nombre del Servicio:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $row['nombre']; ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="marca">Marca:</label>
-                    <input type="text" class="form-control" id="marca" name="marca" required>
+                    <label for="costo">Costo:</label>
+                    <input type="text" class="form-control" id="costo" name="costo" value="<?php echo $row['costo']; ?>" required>
                 </div>
-                <div class="form-group">
-                    <label for="submarca">Submarca:</label>
-                    <input type="text" class="form-control" id="submarca" name="submarca" required>
-                </div>
-                <div class="form-group">
-                    <label for="tipo">Tipo:</label>
-                    <input type="text" class="form-control" id="tipo" name="tipo" required>
-                </div>
-                <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" class="form-control" id="modelo" name="modelo" required>
-                </div>
-                <div class="form-group">
-                    <label for="color">Color:</label>
-                    <input type="text" class="form-control" id="color" name="color" required>
-                </div>
-                <div class="form-group">
-                    <label for="capacidad">Capacidad:</label>
-                    <input type="text" class="form-control" id="capacidad" name="capacidad" required>
-                </div>
-                <div class="form-group">
-                    <label for="año">Año:</label>
-                    <input type="text" class="form-control" id="año" name="año" required>
-                </div>
-                <div class="form-group">
-                    <label for="procedencia">Procedencia:</label>
-                    <input type="text" class="form-control" id="procedencia" name="procedencia" required>
-                </div>
-                <button type="submit" class="btn btn-primary" name="alta_carro">Agregar Carro</button>
-                <a href="listado_carros.php" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary" name="editar_servicio">Guardar Cambios</button>
+                <a href="listado_servicios.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
-<html>
+</body>
+</html>
+
