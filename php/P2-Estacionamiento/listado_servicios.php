@@ -93,7 +93,7 @@ $result = $conn->query($consulta_servicios);
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="index.php"> <!-- Agregamos el enlace al logo -->
-                <img src="./images/Ledetech.png" alt="Logo">
+                <img src="./images/ledetech.png" alt="Logo">
             </a>
         </div>
         <div class="navbar-brand">

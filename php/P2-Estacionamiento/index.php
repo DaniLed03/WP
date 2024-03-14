@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url("./images/FondoCarros2.jpg"); /* Ruta de la imagen de fondo */
+            background-image: url("./images/fondocarros.jpg"); /* Ruta de la imagen de fondo */
             background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
             background-position: center; /* Centra la imagen en la pantalla */
         }
