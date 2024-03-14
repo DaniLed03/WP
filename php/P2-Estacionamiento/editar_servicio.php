@@ -1,8 +1,10 @@
 <?php
+// Incluir el archivo de conexión a la base de datos
 include 'db.php';
 
 // Verificar si se ha enviado el formulario de edición
 if(isset($_POST['editar_servicio'])){
+    // Obtener los datos del formulario
     $id_servicio = $_POST['id_servicio'];
     $nombre = $_POST['nombre'];
     $costo = $_POST['costo'];
@@ -28,8 +30,10 @@ $row = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edición de Servicio</title>
+    <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
+        /* Estilos CSS personalizados */
         body {
             margin: 0;
             padding: 0;
@@ -71,25 +75,31 @@ $row = $result->fetch_assoc();
         .content {
             padding: 20px;
         }
+        /* Estilos para la fuente Comic Sans MS */
         .font-comic {
             font-family: 'Comic Sans MS', cursive;
             color: white; /* Color blanco */
         }
+        /* Estilos para el tamaño personalizado del texto */
         .custom-size {
             font-size: 50px; /* Puedes ajustar el tamaño según tus preferencias */
         }
     </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar">
+        <!-- Logotipo -->
         <div class="navbar-brand">
             <a href="index.php">
                 <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
+        <!-- Título de la página -->
         <div class="navbar-brand">
             Edición de Servicio
         </div>
+        <!-- Menú de navegación -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="alta_carros.php">Agregar Carro</a>
@@ -106,8 +116,10 @@ $row = $result->fetch_assoc();
         </ul>
     </nav>
 
+    <!-- Contenido principal -->
     <div class="content">
         <div class="container mt-5">
+            <!-- Formulario de edición de servicio -->
             <form action="editar_servicio.php" method="POST">
                 <input type="hidden" name="id_servicio" value="<?php echo $row['id_servicio']; ?>">
                 <div class="form-group">
@@ -118,6 +130,7 @@ $row = $result->fetch_assoc();
                     <label for="costo">Costo:</label>
                     <input type="text" class="form-control" id="costo" name="costo" value="<?php echo $row['costo']; ?>" required>
                 </div>
+                <!-- Botones para guardar o cancelar la edición -->
                 <button type="submit" class="btn btn-primary" name="editar_servicio">Guardar Cambios</button>
                 <a href="listado_servicios.php" class="btn btn-secondary">Cancelar</a>
             </form>
@@ -125,4 +138,3 @@ $row = $result->fetch_assoc();
     </div>
 </body>
 </html>
-

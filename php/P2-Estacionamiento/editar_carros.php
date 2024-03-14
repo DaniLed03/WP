@@ -1,13 +1,13 @@
 <?php
-include 'db.php';
+    include 'db.php';
 
-$id_carro = $_GET['id_carro'];
-$sql = "SELECT * FROM carros WHERE id_carro = $id_carro";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-
+    // Obtener el ID del carro de la URL
+    $id_carro = $_GET['id_carro'];
+    // Consultar la información del carro con el ID proporcionado
+    $sql = "SELECT * FROM carros WHERE id_carro = $id_carro";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,6 +18,7 @@ $row = $result->fetch_assoc();
     <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
+        /* Estilos personalizados */
         body {
             margin: 0;
             padding: 0;
@@ -59,6 +60,7 @@ $row = $result->fetch_assoc();
         .content {
             padding: 20px;
         }
+        /* Estilos para el texto Comic Sans MS */
         .font-comic {
             font-family: 'Comic Sans MS', cursive;
             color: white; /* Color blanco */
@@ -69,15 +71,19 @@ $row = $result->fetch_assoc();
     </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar">
         <div class="navbar-brand">
+            <!-- Enlace al inicio -->
             <a href="index.php">
+                <!-- Texto con estilo Comic Sans MS y tamaño personalizado -->
                 <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
         <div class="navbar-brand">
             Edición de Carro
         </div>
+        <!-- Opciones de menú -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="alta_carros.php">Agregar Carro</a>

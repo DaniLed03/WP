@@ -1,12 +1,20 @@
 <?php
+// Incluir el archivo de conexión a la base de datos
 include 'db.php';
 
+// Verificar si se ha enviado el formulario de alta de servicio
 if(isset($_POST['alta_servicio'])){
+    // Obtener los datos del formulario
     $nombre = $_POST['nombre'];
     $costo = $_POST['costo'];
 
+    // Crear la consulta SQL para insertar el servicio en la base de datos
     $sql = "INSERT INTO servicios (nombre, costo) VALUES ('$nombre', '$costo')";
+    
+    // Ejecutar la consulta
     $result = $conn->query($sql);
+    
+    // Redirigir al usuario a la página de listado de servicios después de agregar el servicio
     header("Location: listado_servicios.php");
 }
 ?>
@@ -17,8 +25,10 @@ if(isset($_POST['alta_servicio'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de Servicio</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
+        /* Estilos personalizados */
         body {
             margin: 0;
             padding: 0;
@@ -33,11 +43,6 @@ if(isset($_POST['alta_servicio'])){
             font-size: 24px;
             font-weight: bold;
             text-align: center; /* Centra el texto "Menú Principal" */
-            margin-right: center; /* Empuja el texto hacia la izquierda */
-            margin-left: center; /* Empuja el texto hacia la derecha */
-        }
-        .navbar-brand img {
-            height: 130px; /* Ajusta la altura de la imagen según tus necesidades */
         }
         .navbar-nav {
             display: flex;
@@ -70,15 +75,21 @@ if(isset($_POST['alta_servicio'])){
     </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar">
+        <!-- Marca de navegación -->
         <div class="navbar-brand">
+            <!-- Enlace al inicio -->
             <a href="index.php">
+                <!-- Texto "LedeTaller" -->
                 <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
+        <!-- Texto "Registro de Servicios" -->
         <div class="navbar-brand">
             Registro de Servicios
         </div>
+        <!-- Lista de opciones de navegación -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="alta_carros.php">Agregar Carro</a>
@@ -95,8 +106,10 @@ if(isset($_POST['alta_servicio'])){
         </ul>
     </nav>
 
+    <!-- Contenido principal -->
     <div class="content">
         <div class="container mt-5">
+            <!-- Formulario de alta de servicio -->
             <form action="alta_servicio.php" method="POST">
                 <div class="form-group">
                     <label for="nombre">Nombre del Servicio:</label>
@@ -106,7 +119,9 @@ if(isset($_POST['alta_servicio'])){
                     <label for="costo">Costo:</label>
                     <input type="text" class="form-control" id="costo" name="costo" required>
                 </div>
+                <!-- Botón para enviar el formulario -->
                 <button type="submit" class="btn btn-primary" name="alta_servicio">Agregar Servicio</button>
+                <!-- Enlace para cancelar y volver a la lista de servicios -->
                 <a href="listado_servicios.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>

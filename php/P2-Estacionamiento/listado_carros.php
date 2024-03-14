@@ -1,9 +1,8 @@
 <?php
-include 'db.php';
+include 'db.php'; // Incluir archivo de conexión a la base de datos
 
-$consuta_carros = "SELECT * FROM carros";
-$result = $conn->query($consuta_carros);
-
+$consuta_carros = "SELECT * FROM carros"; // Consulta SQL para obtener todos los registros de la tabla 'carros'
+$result = $conn->query($consuta_carros); // Ejecutar la consulta y almacenar el resultado en una variable
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +11,12 @@ $result = $conn->query($consuta_carros);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Principal</title>
+    <!-- Incluir hoja de estilos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <!-- Incluir librería de SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
+        /* Estilos CSS personalizados */
         body {
             margin: 0;
             padding: 0;
@@ -31,9 +33,6 @@ $result = $conn->query($consuta_carros);
             text-align: center; /* Centra el texto "Menú Principal" */
             margin-right: center; /* Empuja el texto hacia la izquierda */
             margin-left: center; /* Empuja el texto hacia la derecha */
-        }
-        .navbar-brand img {
-            height: 130px; /* Ajusta la altura de la imagen según tus necesidades */
         }
         .navbar-nav {
             display: flex;
@@ -73,16 +72,23 @@ $result = $conn->query($consuta_carros);
     </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar">
+        <!-- Logo -->
         <div class="navbar-brand">
+            <!-- Enlace al inicio -->
             <a href="index.php">
+                <!-- Texto "LedeTaller" -->
                 <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
+        <!-- Título de la página actual -->
         <div class="navbar-brand">
             Listado de Carros
         </div>
+        <!-- Menú de navegación -->
         <ul class="navbar-nav">
+            <!-- Opciones del menú -->
             <li class="nav-item">
                 <a class="nav-link" href="alta_carros.php">Agregar Carro</a>
             </li>
@@ -97,8 +103,11 @@ $result = $conn->query($consuta_carros);
             </li>
         </ul>
     </nav>
+
+    <!-- Contenido principal -->
     <div class="content">
         <div class="container mt-5">
+            <!-- Tabla de listado de carros -->
             <table class="table">
                 <thead>
                     <tr>
@@ -115,6 +124,7 @@ $result = $conn->query($consuta_carros);
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Ciclo while para mostrar cada fila de datos -->
                     <?php while($row = $result->fetch_assoc()){ ?>
                         <tr>
                             <td><?php echo $row['no_serie']; ?></td>
@@ -127,12 +137,18 @@ $result = $conn->query($consuta_carros);
                             <td><?php echo $row['año']; ?></td>
                             <td><?php echo $row['procedencia']; ?></td>
                             <td>
+                                <!-- Grupo de botones para acciones -->
                                 <div class="btn-group" role="group" aria-label="Acciones">
+                                    <!-- Botón para editar -->
                                     <a href="#" class="btn btn-primary editar-btn" data-id="<?php echo $row['id_carro']; ?>">Editar</a>
+                                    <!-- Botón para eliminar -->
                                     <a href="crud.php?eliminar_carro=<?php echo $row['id_carro']; ?>" class="btn btn-danger eliminar-btn">Eliminar</a>
+                                    <!-- Botón para agregar servicio -->
                                     <a href="procesar_entrada_servicio.php?id_carro=<?php echo $row['id_carro']; ?>" class="btn btn-warning">Servicio</a>
                                 </div>
+                                <!-- Grupo de botones para acciones adicionales -->
                                 <div class="btn-group mt-2" role="group" aria-label="Acciones">
+                                    <!-- Botón para ver servicios pendientes -->
                                     <a href="ver_servicios.php?id_carro=<?php echo $row['id_carro']; ?>" class="btn btn-info">Ver Servicios Pendientes</a>
                                 </div>
                             </td>
@@ -140,6 +156,7 @@ $result = $conn->query($consuta_carros);
                     <?php } ?>
                 </tbody>
             </table>
+            <!-- Formulario para agregar un nuevo carro -->
             <form action="alta_carros.php" method="GET">
                 <button type="submit" class="btn btn-primary" name="alta_carros">Agregar Carro</button>
             </form>

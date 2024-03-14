@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de Carros</title>
+    <!-- Incluye el archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <style>
+        /* Estilos personalizados */
         body {
             margin: 0;
             padding: 0;
@@ -47,6 +49,7 @@
         .content {
             padding: 20px;
         }
+        /* Estilos para la fuente Comic Sans MS */
         .font-comic {
             font-family: 'Comic Sans MS', cursive;
             color: white; /* Color blanco */
@@ -57,15 +60,21 @@
     </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar">
+        <!-- Logo -->
         <div class="navbar-brand">
+            <!-- Enlace que lleva a la página de inicio -->
             <a href="index.php">
+                <!-- Texto "LedeTaller" con estilo personalizado -->
                 <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
+        <!-- Título de la página actual -->
         <div class="navbar-brand">
             Registro de Carros
         </div>
+        <!-- Lista de enlaces de navegación -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="alta_carros.php">Agregar Carro</a>
@@ -81,8 +90,10 @@
             </li>
         </ul>
     </nav>
+    <!-- Contenido principal -->
     <div class="content">
         <div class="container mt-5">
+            <!-- Formulario de alta de carros -->
             <form action="crud.php" method="POST">
                 <div class="form-group">
                     <label for="no_serie">No. de Serie:</label>
@@ -120,9 +131,12 @@
                     <label for="procedencia">Procedencia:</label>
                     <input type="text" class="form-control" id="procedencia" name="procedencia" required>
                 </div>
+                <!-- Botón para enviar el formulario -->
                 <button type="submit" class="btn btn-primary" name="alta_carro">Agregar Carro</button>
+                <!-- Enlace para cancelar y regresar al listado de carros -->
                 <a href="listado_carros.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
+</body>
 <html>
