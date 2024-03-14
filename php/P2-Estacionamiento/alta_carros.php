@@ -57,7 +57,7 @@
             </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Registro de Carros
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -76,7 +76,6 @@
     </nav>
     <div class="content">
         <div class="container mt-5">
-            <h2>Alta de Carros</h2>
             <form action="crud.php" method="POST">
                 <div class="form-group">
                     <label for="no_serie">No. de Serie:</label>

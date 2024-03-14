@@ -101,10 +101,12 @@ if(isset($_POST['registrar_entrada'])){
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Compra de Servicios
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -124,7 +126,6 @@ if(isset($_POST['registrar_entrada'])){
 
     <div class="content">
         <div class="container mt-5">
-            <h2>Entrada de Servicios</h2>
             <form action="procesar_entrada_servicio.php" method="POST">
                 <div class="form-group">
                     <label for="id_carro">ID del Carro:</label>

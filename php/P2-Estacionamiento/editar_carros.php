@@ -17,10 +17,77 @@ $row = $result->fetch_assoc();
     <title>Edición de Carro</title>
     <!-- Enlace al archivo CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center; /* Centra el texto "Menú Principal" */
+            margin-right: center; /* Empuja el texto hacia la izquierda */
+            margin-left: center; /* Empuja el texto hacia la derecha */
+        }
+        .navbar-brand img {
+            height: 130px; /* Ajusta la altura de la imagen según tus necesidades */
+        }
+        .navbar-nav {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente las opciones de menú */
+            align-items: center; /* Centra verticalmente las opciones de menú */
+            margin: 0; /* Elimina el margen para alinear correctamente */
+            padding: 0; /* Elimina el relleno para alinear correctamente */
+        }
+        .nav-item {
+            margin-left: 10px; /* Ajusta el espacio entre las opciones de menú */
+        }
+        .nav-link {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #ccc;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
+        </div>
+        <div class="navbar-brand">
+            Edición de Carro
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="alta_carros.php">Agregar Carro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listado_carros.php">Listado de Carros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listado_servicios.php">Listado de Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="alta_servicio.php">Agregar Servicio</a>
+            </li>
+        </ul>
+    </nav>
     <div class="content">
     <div class="container mt-5">
-        <h2>Edición de Carro</h2>
-        <!-- Formulario para editar carros -->
         <form action="crud.php" method="POST">
             <input type="hidden" name="id_carro" value="<?php echo $row['id_carro']; ?>">
             <div class="form-group">
@@ -64,5 +131,6 @@ $row = $result->fetch_assoc();
         </form>
     </div>
 </div>
+</body>
 </html>
 

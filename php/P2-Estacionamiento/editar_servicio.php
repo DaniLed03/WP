@@ -76,10 +76,12 @@ $row = $result->fetch_assoc();
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Edición de Servicio
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -99,7 +101,6 @@ $row = $result->fetch_assoc();
 
     <div class="content">
         <div class="container mt-5">
-            <h2>Edición de Servicio</h2>
             <form action="editar_servicio.php" method="POST">
                 <input type="hidden" name="id_servicio" value="<?php echo $row['id_servicio']; ?>">
                 <div class="form-group">

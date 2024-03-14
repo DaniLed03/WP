@@ -56,15 +56,24 @@ $result = $conn->query($consuta_carros);
         .content {
             padding: 20px;
         }
+        table {
+            color: white; /* Letras blancas */
+        }
+        th {
+            background-color: GRAY; /* Fondo negro */
+            color: white;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Listado de Carros
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -83,7 +92,6 @@ $result = $conn->query($consuta_carros);
     </nav>
     <div class="content">
         <div class="container mt-5">
-            <h2>Listado de Carros</h2>
             <table class="table">
                 <thead>
                     <tr>

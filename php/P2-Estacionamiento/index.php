@@ -11,24 +11,33 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f8f9fa;
+            background-image: url("./images/FondoCarros2.jpg"); /* Ruta de la imagen de fondo */
+            background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+            background-position: center; /* Centra la imagen en la pantalla */
         }
         .content {
             width: 400px;
             text-align: center;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 2px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2);
             border-radius: 10px;
-            background-color: #fff;
+            background-color: transparent;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        h1 {
+            color: white; /* Texto blanco */
+        }
         .btn-purple {
-            background-color: #6f42c1;
-            border-color: #6f42c1;
+            background-color: white; /* Fondo blanco para los botones */
+            color: black; /* Letras negras */
+            border-color: white; /* Color del borde igual al fondo */
+            font-weight: bold; /* Letras en negrita */
         }
         .btn-purple:hover {
-            background-color: #553982;
-            border-color: #553982;
+            background-color: #eeeeee; /* Color de fondo al pasar el mouse */
+            color: black; /* Letras negras */
         }
     </style>
 </head>

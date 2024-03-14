@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2024 a las 10:15:53
+-- Tiempo de generación: 14-03-2024 a las 01:54:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,8 @@ CREATE TABLE `carros` (
 --
 
 INSERT INTO `carros` (`id_carro`, `no_serie`, `marca`, `submarca`, `tipo`, `modelo`, `color`, `capacidad`, `año`, `procedencia`) VALUES
-(13, 1213, 'CHEVROLET', 'MALIBU', 'CARRO', '2000', 'NEGRO', 5, 2002, 'GUERRERO');
+(13, 1213, 'CHEVROLET', 'MALIBU', 'CARRO', '2000', 'NEGRO', 5, 2002, 'GUERRERO'),
+(15, 1212, 'CHEVROLET', 'EXPRESS', 'VAN', '2000', 'BLANCO', 12, 2008, 'DURANGO');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,9 @@ CREATE TABLE `entrada_servicios` (
 --
 
 INSERT INTO `entrada_servicios` (`id_entrada`, `id_carro`, `fecha_ingreso`, `id_servicio`, `total_pagar`) VALUES
-(33, 13, '2024-03-11', 2, 1200.00);
+(33, 13, '2024-03-11', 2, 1200.00),
+(40, 13, '2024-03-21', 5, 50.00),
+(42, 13, '2024-03-05', 6, 500.00);
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,8 @@ CREATE TABLE `servicios` (
 
 INSERT INTO `servicios` (`id_servicio`, `nombre`, `costo`) VALUES
 (2, 'Reparación de Clima', 1200.00),
-(4, 'Reparación de Mofle', 500.00);
+(5, 'Reparación de llantas', 50.00),
+(6, 'Reparación de Mofle', 500.00);
 
 --
 -- Índices para tablas volcadas
@@ -121,19 +125,19 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `carros`
 --
 ALTER TABLE `carros`
-  MODIFY `id_carro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_carro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `entrada_servicios`
 --
 ALTER TABLE `entrada_servicios`
-  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

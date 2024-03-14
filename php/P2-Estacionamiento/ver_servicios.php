@@ -78,15 +78,24 @@ $result_servicios_pendientes = $conn->query($consulta_servicios_pendientes);
         .content {
             padding: 20px;
         }
+        table {
+            color: white; /* Letras blancas */
+        }
+        th {
+            background-color: GRAY; /* Fondo negro */
+            color: white;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Servicios Pendientes para Carro con numero de serie <?php echo $numero_serie; ?>
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -105,7 +114,6 @@ $result_servicios_pendientes = $conn->query($consulta_servicios_pendientes);
     </nav>
     <div class="content">
         <div class="container mt-5">
-            <h2>Servicios Pendientes para Carro con numero de serie <?php echo $numero_serie; ?></h2>
             <table class="table">
                 <thead>
                     <tr>

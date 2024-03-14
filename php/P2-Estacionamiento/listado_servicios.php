@@ -4,17 +4,31 @@ include 'db.php';
 if(isset($_GET['eliminar_servicio'])){
     $id_servicio = $_GET['eliminar_servicio'];
 
-    // Eliminar el servicio de la base de datos
-    $sql_eliminar_servicio = "DELETE FROM servicios WHERE id_servicio = $id_servicio";
-    $result_eliminar_servicio = $conn->query($sql_eliminar_servicio);
+    // Verificar si hay registros relacionados en la tabla entrada_servicios
+    $sql_check_entries = "SELECT COUNT(*) AS total FROM entrada_servicios WHERE id_servicio = $id_servicio";
+    $result_check_entries = $conn->query($sql_check_entries);
+    $row_check_entries = $result_check_entries->fetch_assoc();
+    $total_entries = $row_check_entries['total'];
 
-    header("Location: listado_servicios.php"); // Redirigir al listado de servicios después de eliminar el servicio
-    exit; // Salir del script después de la redirección
+    if($total_entries > 0) {
+        // Mostrar un mensaje indicando que hay registros relacionados
+        echo '<script>alert("Este servicio tiene registros relacionados en la tabla de entradas. Por favor, elimina los registros relacionados primero."); window.location.href = "listado_servicios.php";</script>';
+        exit; // Salir del script después de la redirección
+    } else {
+        // No hay registros relacionados, podemos eliminar el servicio
+        $sql_eliminar_servicio = "DELETE FROM servicios WHERE id_servicio = $id_servicio";
+        $result_eliminar_servicio = $conn->query($sql_eliminar_servicio);
+
+        // Redirigir al listado de servicios después de eliminar el servicio
+        header("Location: listado_servicios.php");
+        exit; // Salir del script después de la redirección
+    }
 }
 
 $consulta_servicios = "SELECT * FROM servicios";
 $result = $conn->query($consulta_servicios);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -66,15 +80,24 @@ $result = $conn->query($consulta_servicios);
         .content {
             padding: 20px;
         }
+        table {
+            color: white; /* Letras blancas */
+        }
+        th {
+            background-color: GRAY; /* Fondo negro */
+            color: white;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Listado de Servicios
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -112,7 +135,6 @@ $result = $conn->query($consulta_servicios);
 
     <div class="content">
         <div class="container mt-5">
-            <h2>Listado de Servicios</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -186,3 +208,5 @@ $result = $conn->query($consulta_servicios);
         });
     });
 </script>
+
+

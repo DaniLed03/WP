@@ -65,10 +65,12 @@ if(isset($_POST['alta_servicio'])){
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <img src="./images/Ledetech.png" alt="Logo">
+            <a href="index.php"> <!-- Agregamos el enlace al logo -->
+                <img src="./images/Ledetech.png" alt="Logo">
+            </a>
         </div>
         <div class="navbar-brand">
-            Menú Principal
+            Registro de Servicios
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -88,7 +90,6 @@ if(isset($_POST['alta_servicio'])){
 
     <div class="content">
         <div class="container mt-5">
-            <h2>Alta de Servicio</h2>
             <form action="alta_servicio.php" method="POST">
                 <div class="form-group">
                     <label for="nombre">Nombre del Servicio:</label>
