@@ -96,13 +96,20 @@ if(isset($_POST['registrar_entrada'])){
         .content {
             padding: 20px;
         }
+        .font-comic {
+            font-family: 'Comic Sans MS', cursive;
+            color: white; /* Color blanco */
+        }
+        .custom-size {
+            font-size: 50px; /* Puedes ajustar el tamaño según tus preferencias */
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a href="index.php"> <!-- Agregamos el enlace al logo -->
-                <img src="/images/ledetech.png" alt="Logo">
+            <a href="index.php">
+                <span class="font-comic custom-size">LedeTaller</span>
             </a>
         </div>
         <div class="navbar-brand">
