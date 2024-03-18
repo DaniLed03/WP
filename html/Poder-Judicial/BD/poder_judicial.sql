@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2024 a las 11:18:49
+-- Tiempo de generación: 18-03-2024 a las 08:04:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -83,6 +83,18 @@ CREATE TABLE `cat_tipocuaderno` (
   `TIPOCUADERNO` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cat_tipocuaderno`
+--
+
+INSERT INTO `cat_tipocuaderno` (`ID_TIPOCUADERNO`, `ID_TIPOASUNTO`, `TIPOCUADERNO`) VALUES
+(0, 0, 'Sin especificar'),
+(1, 1, 'Principal'),
+(2, 1, 'Incidental'),
+(3, 1, 'Duplicado del Incidente'),
+(4, 2, 'Original'),
+(5, 2, 'Duplicado');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +105,17 @@ CREATE TABLE `cat_valoracion` (
   `ID_VALORACION` int(11) NOT NULL,
   `VALORACION` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cat_valoracion`
+--
+
+INSERT INTO `cat_valoracion` (`ID_VALORACION`, `VALORACION`) VALUES
+(0, 'Sin especificar'),
+(1, 'Depurable'),
+(2, 'Destruible'),
+(3, 'Conservable'),
+(4, 'Relevancia Documental');
 
 -- --------------------------------------------------------
 
@@ -161,6 +184,13 @@ CREATE TABLE `expedientes` (
   `SECRETARIO` text NOT NULL,
   `OBSERVACIONES` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `expedientes`
+--
+
+INSERT INTO `expedientes` (`ID_TIPOASUNTO`, `NOEXPEDIENTE`, `NUN_ORDEN`, `AÑO`, `EXPEDIENTE`, `PERSONA`, `MESA`, `SECRETARIO`, `OBSERVACIONES`) VALUES
+(1, '1/2016', '', 2016, 1, 'JUEZ NOVENO DE DISTRITO EN EL ESTADO CON RESIDENCIA EN TAMPICO, TAMAULIPAS.', 'I-A', 'SARA JUDITH GUDIÑO MARTÍNEZ', 'NADA');
 
 -- --------------------------------------------------------
 
@@ -281,12 +311,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Filtros para la tabla `cat_tipoasunto`
---
-ALTER TABLE `cat_tipoasunto`
-  ADD CONSTRAINT `cat_tipoasunto_ibfk_1` FOREIGN KEY (`ID_TIPOASUNTO`) REFERENCES `expedientes` (`ID_TIPOASUNTO`);
-
---
 -- Filtros para la tabla `cuadernos`
 --
 ALTER TABLE `cuadernos`
@@ -305,7 +329,6 @@ ALTER TABLE `det_prestamo`
 -- Filtros para la tabla `expedientes`
 --
 ALTER TABLE `expedientes`
-  ADD CONSTRAINT `expedientes_ibfk_1` FOREIGN KEY (`ID_TIPOASUNTO`) REFERENCES `cuadernos` (`ID_TIPOASUNTO`),
   ADD CONSTRAINT `fk_expedientes_tipoasunto` FOREIGN KEY (`ID_TIPOASUNTO`) REFERENCES `cat_tipoasunto` (`ID_TIPOASUNTO`);
 
 --
