@@ -136,7 +136,7 @@ if(isset($_POST['registrar_entrada'])){
             <form action="procesar_entrada_servicio.php" method="POST">
                 <div class="form-group">
                     <label for="id_carro">ID del Carro:</label>
-                    <input type="text" class="form-control" id="id_carro" name="id_carro" value="<?php echo isset($_GET['id_carro']) ? $_GET['id_carro'] : ''; ?>" required>
+                    <input type="Number" class="form-control" id="id_carro" name="id_carro" value="<?php echo isset($_GET['id_carro']) ? $_GET['id_carro'] : ''; ?>" required readonly>
                 </div>
                 <div class="form-group">
                     <label for="fecha_ingreso">Fecha de Ingreso:</label>

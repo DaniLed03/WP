@@ -128,7 +128,7 @@ $row = $result->fetch_assoc();
                 </div>
                 <div class="form-group">
                     <label for="costo">Costo:</label>
-                    <input type="text" class="form-control" id="costo" name="costo" value="<?php echo $row['costo']; ?>" required>
+                    <input type="Number" class="form-control" id="costo" name="costo" value="<?php echo $row['costo']; ?>" required>
                 </div>
                 <!-- Botones para guardar o cancelar la edición -->
                 <button type="submit" class="btn btn-primary" name="editar_servicio">Guardar Cambios</button>

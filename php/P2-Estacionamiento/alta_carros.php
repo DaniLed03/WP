@@ -97,7 +97,7 @@
             <form action="crud.php" method="POST">
                 <div class="form-group">
                     <label for="no_serie">No. de Serie:</label>
-                    <input type="text" class="form-control" id="no_serie" name="no_serie" required>
+                    <input type="Number" class="form-control" id="no_serie" name="no_serie" required>
                 </div>
                 <div class="form-group">
                     <label for="marca">Marca:</label>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label for="año">Año:</label>
-                    <input type="text" class="form-control" id="año" name="año" required>
+                    <input type="Number" class="form-control" id="año" name="año" required>
                 </div>
                 <div class="form-group">
                     <label for="procedencia">Procedencia:</label>

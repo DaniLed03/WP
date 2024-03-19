@@ -105,7 +105,7 @@
             <input type="hidden" name="id_carro" value="<?php echo $row['id_carro']; ?>">
             <div class="form-group">
                 <label for="no_serie">No. de Serie:</label>
-                <input type="text" class="form-control" id="no_serie" name="no_serie" value="<?php echo $row['no_serie']; ?>" required>
+                <input type="Number" class="form-control" id="no_serie" name="no_serie" value="<?php echo $row['no_serie']; ?>" required readonly>
             </div>
             <div class="form-group">
                 <label for="marca">Marca:</label>
@@ -133,7 +133,7 @@
             </div>
             <div class="form-group">
                 <label for="año">Año:</label>
-                <input type="text" class="form-control" id="año" name="año" value="<?php echo $row['año']; ?>" required>
+                <input type="Number" class="form-control" id="año" name="año" value="<?php echo $row['año']; ?>" required>
             </div>
             <div class="form-group">
                 <label for="procedencia">Procedencia:</label>
